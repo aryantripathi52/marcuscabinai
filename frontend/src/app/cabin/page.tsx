@@ -757,8 +757,8 @@ function DoctorsCabinContent() {
                   onClick={toggleListening}
                   disabled={isSpeaking || questionsRemaining <= 0 || isWaitingReply}
                   className={`relative z-10 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200 active:scale-95 group focus:outline-none disabled:opacity-40 ${isListening
-                      ? 'bg-error text-surface-container-lowest shadow-[0_0_24px_rgba(239,68,68,0.7)]'
-                      : 'bg-primary-container text-surface-container-lowest shadow-[0_0_24px_rgba(0,242,254,0.6)] hover:bg-primary-fixed-dim'
+                    ? 'bg-error text-surface-container-lowest shadow-[0_0_24px_rgba(239,68,68,0.7)]'
+                    : 'bg-primary-container text-surface-container-lowest shadow-[0_0_24px_rgba(0,242,254,0.6)] hover:bg-primary-fixed-dim'
                     }`}
                   title={isListening ? 'Click to Stop Listening' : 'Click to Speak (Speech-to-Text)'}
                 >
@@ -936,8 +936,8 @@ function DoctorsCabinContent() {
 
                       <div
                         className={`p-3.5 rounded-lg text-body-sm text-on-surface leading-relaxed max-w-[95%] ${isDoctor
-                            ? 'bg-surface-container-low/90 border-l-2 border-primary-container border-outline-variant/30 space-y-2'
-                            : 'bg-surface-container-high/80 border border-primary-container/20 text-right'
+                          ? 'bg-surface-container-low/90 border-l-2 border-primary-container border-outline-variant/30 space-y-2'
+                          : 'bg-surface-container-high/80 border border-primary-container/20 text-right'
                           }`}
                       >
                         <p className="whitespace-pre-line">{msg.content}</p>
