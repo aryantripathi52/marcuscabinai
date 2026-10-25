@@ -1,5 +1,5 @@
 'use client';
-
+import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import Link from 'next/link';
 import { fetchReportById, sendConsultationChat, PatientReport, ChatMessage, Metric, Combination, TriageSummary } from '@/lib/api';
