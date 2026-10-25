@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import Link from 'next/link';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { fetchReportById, sendConsultationChat, PatientReport, ChatMessage, Metric, Combination, TriageSummary } from '@/lib/api';
 import { fetchReportById, sendConsultationChat, PatientReport, ChatMessage } from '@/lib/api';
 import { speechService } from '@/lib/speech';
 import DoctorAvatar from '@/components/DoctorAvatar';
@@ -61,7 +61,7 @@ function DoctorsCabinContent() {
       try {
         const stored = localStorage.getItem('synapse_patient_profile');
         if (stored) customProfile = JSON.parse(stored);
-      } catch (e) {}
+      } catch (e) { }
 
       const patientName = customProfile?.full_name || customProfile?.name || 'Patient';
       const patientIdVal = patientId || customProfile?.id || customProfile?.patient_id || 'PAT-' + Math.floor(1000 + Math.random() * 9000);
@@ -242,7 +242,7 @@ function DoctorsCabinContent() {
       setReport(newAnalyzedReport);
       try {
         localStorage.setItem('synapse_latest_report', JSON.stringify(newAnalyzedReport));
-      } catch (e) {}
+      } catch (e) { }
 
       setChatHistory([
         {
@@ -269,7 +269,7 @@ function DoctorsCabinContent() {
       try {
         const stored = localStorage.getItem('synapse_patient_profile');
         if (stored) customProfile = JSON.parse(stored);
-      } catch (e) {}
+      } catch (e) { }
 
       // Reset to clean fresh consultation session
       setReport(null);
@@ -523,9 +523,8 @@ function DoctorsCabinContent() {
             <div className="flex items-center gap-1 pl-2 border-l border-outline-variant/30">
               <button
                 onClick={() => setSoundEnabled(!soundEnabled)}
-                className={`p-2 rounded-lg transition-colors ${
-                  soundEnabled ? 'text-primary-container' : 'text-on-surface-variant'
-                }`}
+                className={`p-2 rounded-lg transition-colors ${soundEnabled ? 'text-primary-container' : 'text-on-surface-variant'
+                  }`}
                 title={soundEnabled ? 'Voice Enabled' : 'Voice Muted'}
               >
                 <span className="material-symbols-outlined text-[20px]">
@@ -664,9 +663,8 @@ function DoctorsCabinContent() {
               {/* Active Listening / Speaking Badge */}
               <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high/80 border border-primary-container/30">
                 <span
-                  className={`w-2 h-2 rounded-full ${
-                    isSpeaking ? 'bg-secondary animate-ping' : 'bg-primary-container animate-pulse'
-                  }`}
+                  className={`w-2 h-2 rounded-full ${isSpeaking ? 'bg-secondary animate-ping' : 'bg-primary-container animate-pulse'
+                    }`}
                 ></span>
                 <span className="font-telemetry-sm text-[10px] tracking-wider text-primary-container uppercase font-semibold">
                   {isSpeaking ? 'Voice Active' : isListening ? 'Listening Voice' : 'Active Listening'}
@@ -758,11 +756,10 @@ function DoctorsCabinContent() {
                 <button
                   onClick={toggleListening}
                   disabled={isSpeaking || questionsRemaining <= 0 || isWaitingReply}
-                  className={`relative z-10 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200 active:scale-95 group focus:outline-none disabled:opacity-40 ${
-                    isListening
+                  className={`relative z-10 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200 active:scale-95 group focus:outline-none disabled:opacity-40 ${isListening
                       ? 'bg-error text-surface-container-lowest shadow-[0_0_24px_rgba(239,68,68,0.7)]'
                       : 'bg-primary-container text-surface-container-lowest shadow-[0_0_24px_rgba(0,242,254,0.6)] hover:bg-primary-fixed-dim'
-                  }`}
+                    }`}
                   title={isListening ? 'Click to Stop Listening' : 'Click to Speak (Speech-to-Text)'}
                 >
                   <span
@@ -780,12 +777,12 @@ function DoctorsCabinContent() {
                   {isRedirecting
                     ? 'Final report compiled. Transitioning to Export...'
                     : isSpeaking
-                    ? 'Doctor is speaking... Listening buffer locked'
-                    : isListening
-                    ? 'Recording voice... Click to submit inquiry'
-                    : questionsRemaining > 0
-                    ? `Ready. Press mic or type (${questionsRemaining} queries remaining)`
-                    : 'Consultation quota reached.'}
+                      ? 'Doctor is speaking... Listening buffer locked'
+                      : isListening
+                        ? 'Recording voice... Click to submit inquiry'
+                        : questionsRemaining > 0
+                          ? `Ready. Press mic or type (${questionsRemaining} queries remaining)`
+                          : 'Consultation quota reached.'}
                 </span>
                 <p className="text-caption font-caption text-on-surface-variant text-[11px] mt-0.5">
                   Direct clinical audio stream calibrated for rapid diagnostic reasoning
@@ -938,11 +935,10 @@ function DoctorsCabinContent() {
                       </div>
 
                       <div
-                        className={`p-3.5 rounded-lg text-body-sm text-on-surface leading-relaxed max-w-[95%] ${
-                          isDoctor
+                        className={`p-3.5 rounded-lg text-body-sm text-on-surface leading-relaxed max-w-[95%] ${isDoctor
                             ? 'bg-surface-container-low/90 border-l-2 border-primary-container border-outline-variant/30 space-y-2'
                             : 'bg-surface-container-high/80 border border-primary-container/20 text-right'
-                        }`}
+                          }`}
                       >
                         <p className="whitespace-pre-line">{msg.content}</p>
 
