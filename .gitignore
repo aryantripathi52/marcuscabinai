@@ -1,0 +1,23 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Environment secrets - NEVER COMMIT THESE
+backend/.env
+frontend/.env.local
+.env.local
+.env.production
+.env
+# Next.js
+frontend/.next/
+frontend/out/
+frontend/node_modules/
+
+# Misc
+*.log
+.DS_Store
+Thumbs.db
