@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import Link from 'next/link';
 import { fetchReportById, sendConsultationChat, PatientReport, ChatMessage, Metric, Combination, TriageSummary } from '@/lib/api';
-import { fetchReportById, sendConsultationChat, PatientReport, ChatMessage } from '@/lib/api';
 import { speechService } from '@/lib/speech';
 import DoctorAvatar from '@/components/DoctorAvatar';
 
